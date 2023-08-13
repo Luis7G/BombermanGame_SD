@@ -41,9 +41,10 @@ public class GameLoop : Game
     protected override void Initialize()
     {
         Ground.LoadTextures(this.GraphicsDevice);
-        Bomb.LoadTextures(this.GraphicsDevice); 
+        Bomb.LoadTextures(this.GraphicsDevice);
         Block.LoadTextures(this.GraphicsDevice);
         Player.LoadTextures(this.GraphicsDevice);
+        Fire.LoadTextures(this.GraphicsDevice);
 
         base.Initialize();
 
@@ -63,7 +64,7 @@ public class GameLoop : Game
 
     protected override void Update(GameTime time)
     {
-        
+
         if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !isMainMenuVisible && !isEscapePressed)
         {
             isPauseMenuVisible = !isPauseMenuVisible;
@@ -91,7 +92,7 @@ public class GameLoop : Game
         this.scene.Render(time, this.spriteBatch);
 
         //this.spriteBatch.DrawString(this.font, "Bomberman", new Vector2(10, 10), Color.White, 0.0f, new Vector2(), 0.6f, SpriteEffects.None, 0);
-        
+
         if (isMainMenuVisible)
         {
             mainMenu.Draw(spriteBatch, font, this.graphics.PreferredBackBufferHeight, this.graphics.PreferredBackBufferHeight);

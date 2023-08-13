@@ -67,6 +67,13 @@ class Player : GameObject
     {
         Body body = other.Body;
 
+
+        if (body.Tag is Fire)
+        {
+            this.Destroy();
+        }
+
+
         return true;
     }
 

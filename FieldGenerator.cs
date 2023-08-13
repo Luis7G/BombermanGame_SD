@@ -25,35 +25,35 @@ internal class FieldGenerator
         // Paredes Laterales
         for (int i = 0; i < size; i++)
         {
-            Block up = new Block(false);
+            Block up = new Block(false, false);
             up.Position.Y = 0.0f;
             up.Position.X = i * spacing - 1;
             scene.Add(up);
 
-            Block down = new Block(false);
+            Block down = new Block(false, false);
             down.Position.Y = (size - 1) * spacing;
             down.Position.X = i * spacing;
             scene.Add(down);
 
-            Block left = new Block(false);
+            Block left = new Block(false, false);
             left.Position.X = 0.0f;
             left.Position.Y = i * spacing;
             scene.Add(left);
 
-            Block right = new Block(false);
+            Block right = new Block(false, false);
             right.Position.X = (size - 1) * spacing;
             right.Position.Y = i * spacing;
             scene.Add(right);
         }
 
         // Centrales
-        int[] spaces = {2, 4, 6, 8, 10, 12, 14, 16};
+        int[] spaces = { 2, 4, 6, 8, 10, 12, 14, 16 };
 
         foreach (int a in spaces)
         {
             foreach (int b in spaces)
             {
-                Block middle = new Block(false);
+                Block middle = new Block(false, false);
                 middle.Position.X = a * spacing;
                 middle.Position.Y = b * spacing;
                 scene.Add(middle);
@@ -67,7 +67,7 @@ internal class FieldGenerator
         bool occupied = false;
         for (int i = 0; i < blocks; i++)
         {
-            Block block = new Block(true);
+            Block block = new Block(true, random.NextDouble() > 0.8);
             block.Position.X = (1 + random.Next(size - 2)) * spacing;
             block.Position.Y = (1 + random.Next(size - 2)) * spacing;
             foreach (int x in spaces)
@@ -84,16 +84,17 @@ internal class FieldGenerator
                         occupied = false;
                     }
                 }
-                if(occupied == true) break;
+                if (occupied == true) break;
             }
 
-            if (occupied == false) {
-                if(block.Position.X != 1 * spacing && block.Position.Y != 1 * spacing) scene.Add(block);
+            if (occupied == false)
+            {
+                if (block.Position.X != 1 * spacing && block.Position.Y != 1 * spacing) scene.Add(block);
             }
 
         }
 
-        Player player = new Player(new PlayerKeyboardControls(PlayerKeyboardControls.keysPlayer)); 
+        Player player = new Player(new PlayerKeyboardControls(PlayerKeyboardControls.keysPlayer));
         player.Position.X = 45.0f;
         player.Position.Y = 45.0f;
         scene.Add(player);
