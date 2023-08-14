@@ -22,6 +22,7 @@ class PlayerKeyboardControls : PlayerControls
         this.keys = keys;
     }
 
+    //Utilizan el estado actual del teclado para determinar si la tecla correspondiente está siendo presionada.
     public bool up() { return Keyboard.GetState().IsKeyDown(this.keys[0]); }
     public bool down() { return Keyboard.GetState().IsKeyDown(this.keys[1]); }
     public bool left() { return Keyboard.GetState().IsKeyDown(this.keys[2]); }

@@ -4,7 +4,7 @@ using tainicom.Aether.Physics2D.Dynamics;
 
 internal class Fire : GameObject
 {
-    // Tiempo restante hasta que la bomba explote
+    // Tiempo restante hasta que la bomba explote. Cuando el tiempo restante llega a cero, el efecto de explosión se elimina.
     public float TimeLeft = 1.0f;
 
     // Textura de la bomba
@@ -17,6 +17,8 @@ internal class Fire : GameObject
 
     public override void Initialize(GraphicsDevice graphicsDevice)
     {
+
+        // Define la textura del efecto de explosión y crea un cuerpo físico rectangular estático en el mundo del juego.
         this.Texture = Fire.FireTexture;
 
         this.Body = this.Scene.World.CreateRectangle(this.Size.X, this.Size.Y, this.Rotation, this.Position, 0.0f, BodyType.Static);
@@ -31,6 +33,7 @@ internal class Fire : GameObject
         this.TimeLeft -= delta;
         if (this.TimeLeft < 0)
         {
+            // Se elimina el efecto de explosión de la escena.
             this.Scene.Remove(this);
         }
 

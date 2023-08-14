@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+//Instrucciones similares a la clase Main Menu
 public class PauseMenu
 {
     private Texture2D background;

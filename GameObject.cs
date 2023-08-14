@@ -29,7 +29,7 @@ public class GameObject
     // Tamaño del objeto en la pantalla
     public Vector2 Size = new Vector2(45.0f, 45.0f);
 
-    // Punto central u Origen dle objeto.
+    // Punto central u Origen del objeto.
     public Vector2 Origin = new Vector2(15.0f, 15.0f);
 
     // Escala del objeto aplicado despues de darle el tamaño

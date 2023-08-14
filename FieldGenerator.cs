@@ -1,14 +1,14 @@
 using System;
 
-
+// Generar el terreno o escenario del juego con bloques, suelos y el jugador.
 internal class FieldGenerator
 {
     public static void Generate(Scene scene)
     {
-        int size = 19;
-        float spacing = 45.0f;
+        int size = 19; // Tamaño del campo de juego
+        float spacing = 45.0f; // Espaciado entre elementos 
 
-        // Piso
+        // Se generan los suelos en una cuadrícula con texturas alternadas según la posición.
         for (int x = 0; x < size; x++)
         {
             for (int y = 0; y < size; y++)
@@ -22,9 +22,10 @@ internal class FieldGenerator
             }
         }
 
-        // Paredes Laterales
+        // Se generan los bordes de bloques alrededor del campo de juego.
         for (int i = 0; i < size; i++)
         {
+            // Bordes superiores e inferiores
             Block up = new Block(false, false);
             up.Position.Y = 0.0f;
             up.Position.X = i * spacing - 1;
@@ -35,6 +36,7 @@ internal class FieldGenerator
             down.Position.X = i * spacing;
             scene.Add(down);
 
+            // Bordes izquierdo y derecho
             Block left = new Block(false, false);
             left.Position.X = 0.0f;
             left.Position.Y = i * spacing;
@@ -46,7 +48,7 @@ internal class FieldGenerator
             scene.Add(right);
         }
 
-        // Centrales
+        // Se generan bloques en posiciones específicas dentro del campo.
         int[] spaces = { 2, 4, 6, 8, 10, 12, 14, 16 };
 
         foreach (int a in spaces)
@@ -60,7 +62,7 @@ internal class FieldGenerator
             }
         }
 
-        // Bloques
+        // Se generan bloques aleatorios, asegurando que no se superpongan con las posiciones especiales generadas anteriormente.
         Random random = new Random();
 
         int blocks = 200;
@@ -70,6 +72,8 @@ internal class FieldGenerator
             Block block = new Block(true, random.NextDouble() > 0.8);
             block.Position.X = (1 + random.Next(size - 2)) * spacing;
             block.Position.Y = (1 + random.Next(size - 2)) * spacing;
+
+            // Verificar que el espacio no esté ocupado
             foreach (int x in spaces)
             {
                 foreach (int y in spaces)
@@ -89,11 +93,13 @@ internal class FieldGenerator
 
             if (occupied == false)
             {
+                // Agregar el bloque si el espacio no está ocupado
                 if (block.Position.X != 1 * spacing && block.Position.Y != 1 * spacing) scene.Add(block);
             }
 
         }
 
+        // Se agrega un jugador a la escena.
         Player player = new Player(new PlayerKeyboardControls(PlayerKeyboardControls.keysPlayer));
         player.Position.X = 45.0f;
         player.Position.Y = 45.0f;

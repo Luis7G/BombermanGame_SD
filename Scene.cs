@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using tainicom.Aether.Physics2D.Dynamics;
 
 // Las escenas son una coleccion de objetos renderizados que se dibujan en pantalla
+// Representa el entorno y la lógica del juego, controlando la gestión de objetos, la simulación física y el proceso de actualización y renderizado. 
 
-public  class Scene
+public class Scene
 {   // Lista de objetos en la escena
     // Estos son actualizados y renderizados en orden
     public List<GameObject> Objects = new List<GameObject>();
@@ -17,6 +18,8 @@ public  class Scene
     // Dispositivo de gráficos usados por los objetos de la escena. Tomado de Xna.Framework.Graphics
     public GraphicsDevice GraphicsDevice = null;
 
+    // El constructor inicializa la instancia del mundo físico, establece la gravedad en cero (indicando que no hay gravedad en este caso)
+    // y almacena la referencia al dispositivo gráfico utilizado.
     public Scene(GraphicsDevice graphicsDevice)
     {
         this.GraphicsDevice = graphicsDevice;
@@ -41,6 +44,8 @@ public  class Scene
     public void Remove(GameObject obj)
     {
         this.Objects.Remove(obj);
+
+        // Si el objeto tiene un cuerpo físico asociado, lo elimina del mundo físico.
         if (obj.Body != null)
         {
             this.World.RemoveAsync(obj.Body);
@@ -53,6 +58,7 @@ public  class Scene
         this.World.Step((float)time.ElapsedGameTime.TotalSeconds);
 
         GameObject[] objs = this.Objects.ToArray();
+        // Realiza una iteración de la simulación física, actualiza todos los objetos en la escena (excepto si el menú de pausa está visible).
         if (!gameLoop.isPauseMenuVisible)
         {
             foreach (GameObject obj in objs)
@@ -71,6 +77,7 @@ public  class Scene
         }
     }
 
+    // Borra todos los objetos de la lista de objetos de la escena.
     public void ClearObjects()
     {
         Objects.Clear();

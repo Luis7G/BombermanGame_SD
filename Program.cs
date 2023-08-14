@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 new GameLoop().Run();
 
-// Clase Main del juego
+// Clase Main del juego que actúa como el ciclo principal del juego y maneja la inicialización, actualización y renderizado del juego.
 public class GameLoop : Game
 {
     private GraphicsDeviceManager graphics;
@@ -24,6 +24,7 @@ public class GameLoop : Game
     public bool isPauseMenuVisible;
     private bool isEscapePressed = false;
 
+    // Configurar el entorno del juego, como las preferencias de tamaño de ventana, el directorio de contenido, la visibilidad del cursor del mouse, etc.
     public GameLoop()
     {
         this.graphics = new GraphicsDeviceManager(this);
@@ -38,6 +39,7 @@ public class GameLoop : Game
         this.IsMouseVisible = true;
     }
 
+    // Realizar la inicialización de componentes, cargar texturas y fuentes, configurar la escena y los menús.
     protected override void Initialize()
     {
         Ground.LoadTextures(this.GraphicsDevice);
@@ -62,6 +64,7 @@ public class GameLoop : Game
 
     }
 
+    //Controla la aparición y desaparición del menú de pausa, así como la actualización de la escena y los menús.
     protected override void Update(GameTime time)
     {
 
@@ -83,6 +86,7 @@ public class GameLoop : Game
         this.scene.Update(time, this);
     }
 
+    // Dibuja los objetos en la escena, así como los menús principales y de pausa.
     protected override void Draw(GameTime time)
     {
         GraphicsDevice.Clear(Color.Black);
@@ -109,6 +113,7 @@ public class GameLoop : Game
         base.Draw(time);
     }
 
+    // Devuelve una referencia a la instancia de la clase Scene, lo que permite a otras partes del juego acceder y manipular la escena.
     public Scene GetScene()
     {
         return scene;

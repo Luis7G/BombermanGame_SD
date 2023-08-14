@@ -16,13 +16,13 @@ class Player : GameObject
     // Poder de las bombas del jugador
     public int Power = 1;
 
-    // Tiempo entre las bombas para el jugtador
+    // Tiempo que debe pasar antes de poder colocar otra bomba
     public float BombTime = 3.0f;
 
-    // Tiempo hasta que la siguiente bomba pueda colocarse
+    // Almacena el tiempo restante antes de que el jugador pueda colocar otra bomba.
     private float NextBombTime = 0.0f;
 
-    // Texturas 
+    // Texturas que representan las diferentes apariencias del personaje.
     public static Texture2D[] Textures = new Texture2D[12];
 
     public static void LoadTextures(GraphicsDevice graphicsDevice)
@@ -44,6 +44,7 @@ class Player : GameObject
         }
     }
 
+    //Contructor. Permite vincular los controles al personaje.
     public Player(PlayerControls controls)
     {
         this.Controls = controls;
@@ -51,6 +52,7 @@ class Player : GameObject
 
     public override void Initialize(GraphicsDevice graphicsDevice)
     {
+        // Define la textura inicial del personaje y crea un cuerpo físico circular en el mundo del juego.
         this.Texture = Player.Textures[6];
 
         this.Scale = 1.0f;
@@ -62,12 +64,12 @@ class Player : GameObject
         this.Body.OnCollision += this.OnCollision;
     }
 
-    // Proceso de colisiones con otros objetos de la escena
+    // Proceso de colisiones del personaje con otros objetos de la escena
     public bool OnCollision(Fixture self, Fixture other, Contact contact)
     {
         Body body = other.Body;
 
-
+        // Si la colisión fue con un objeto de tipo Fire (efecto de explosión), destruye al personaje.
         if (body.Tag is Fire)
         {
             this.Destroy();
