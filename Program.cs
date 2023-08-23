@@ -46,6 +46,7 @@ public class GameLoop : Game
         Bomb.LoadTextures(this.GraphicsDevice);
         Block.LoadTextures(this.GraphicsDevice);
         Player.LoadTextures(this.GraphicsDevice);
+        Enemy.LoadTextures(this.GraphicsDevice);
         Fire.LoadTextures(this.GraphicsDevice);
 
         base.Initialize();

@@ -1,4 +1,5 @@
 using System;
+using Microsoft.Xna.Framework;
 
 // Generar el terreno o escenario del juego con bloques, suelos y el jugador.
 internal class FieldGenerator
@@ -104,5 +105,22 @@ internal class FieldGenerator
         player.Position.X = 45.0f;
         player.Position.Y = 45.0f;
         scene.Add(player);
+
+        // Agregar un enemigo a la escena.
+        AddEnemies(scene, player);
+
+    }
+    private static void AddEnemies(Scene scene, Player player)
+    {
+        int enemyCount = 1; // Number of enemies you want to add
+
+        for (int i = 0; i < enemyCount; i++)
+        {
+            Enemy enemy = new Enemy(player);
+            enemy.Position.X = 210.0f;
+            enemy.Position.Y = 45.0f;
+
+            scene.Add(enemy);
+        }
     }
 }

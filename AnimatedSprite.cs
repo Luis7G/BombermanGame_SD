@@ -10,7 +10,7 @@ class AnimatedSprite : GameObject
     //Números de filas y columnas en la hoja de sprites.
     public int Rows; 
 
-    public int Columns; 
+    public int Columns;
 
     private int frames; //Cantidad total de cuadros en la animación.
 
